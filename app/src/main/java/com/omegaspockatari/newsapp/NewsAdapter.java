@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by ${Michael} on 8/24/2016.
@@ -33,9 +31,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.news_web_title);
         titleTextView.setText(currentNews.getNewsTitle());
 
-        /**
-         * TODO: Create a Date object and create a method to turn this into an easily readable date.
-         */
         TextView publicationDateTextView = (TextView) listItemView.findViewById(R.id.news_web_publication_date);
         publicationDateTextView.setText(currentNews.getNewsPublicationDate());
 
@@ -46,13 +41,5 @@ public class NewsAdapter extends ArrayAdapter<News> {
         sectionNameTextView.setText(currentNews.getNewsSectionName());
 
         return listItemView;
-    }
-
-    private String formatDate(Date dateObject) {
-
-        /** Formatting the dateObject into a readable date with dateFormat */
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy h:mm a");
-
-        return dateFormat.format(dateObject);
     }
 }

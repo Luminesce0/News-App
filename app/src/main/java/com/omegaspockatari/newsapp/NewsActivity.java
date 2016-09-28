@@ -9,7 +9,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -45,12 +44,6 @@ public class NewsActivity extends AppCompatActivity
 
         /** Setup the adapter on our given list view to populate the UI. */
         newsListView.setAdapter(mAdapter);
-
-        /**
-         * TODO: Setup internet connectivity circumstances
-         * TODO: Setup Preferences Section
-         * TODO: Setup Loader stuff
-         */
 
         /** Get a reference to the ConnectivityManager to check state of network connectivity */
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -88,8 +81,6 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        Log.v(LOG_TAG, "onCreateLoader returning a new NewsLoader");
-
         /** Create a baseUri and then build upon it with relevant user data should it be integrated */
         Uri baseUri = Uri.parse(NEWS_API_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -99,7 +90,6 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
-        Log.v(LOG_TAG, "onLoadFinished");
         /** Hide loading indicator because the data has been loaded */
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
@@ -114,7 +104,6 @@ public class NewsActivity extends AppCompatActivity
          * Should the provided list of news items be valid, update the adapter's data set.
          * This triggers the list view to update.
          */
-        Log.v(LOG_TAG, "mAdapter.addAll(news)");
         if (news != null && !news.isEmpty()) {
             mAdapter.addAll(news);
         }
@@ -123,7 +112,6 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
-        Log.v(LOG_TAG, "onLoaderReset - mAdapter.clear()");
         mAdapter.clear();
     }
 }
