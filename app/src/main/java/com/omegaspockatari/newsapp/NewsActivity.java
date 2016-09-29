@@ -21,7 +21,7 @@ public class NewsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>> {
 
     private static final String LOG_TAG = NewsActivity.class.getSimpleName();
-    private static final String NEWS_API_URL = "http://content.guardianapis.com/search?q=magic%20leap&api-key=test";
+    private static final String NEWS_API_URL = "http://content.guardianapis.com/search?q=magic%20leap&api-key=test&show-tags=contributor";
     /**
      * This is a constant value for our News Loader. Only really relevant if we have multiple
      */
@@ -63,7 +63,6 @@ public class NewsActivity extends AppCompatActivity
              * the activity implements the LoaderCallbacks interface.
              */
             getLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
-
         }
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,7 +77,6 @@ public class NewsActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -109,7 +107,6 @@ public class NewsActivity extends AppCompatActivity
         if (news != null && !news.isEmpty()) {
             mAdapter.addAll(news);
         }
-
     }
 
     @Override

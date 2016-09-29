@@ -54,7 +54,6 @@ public class QueryUtils {
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
-
         if (url == null) {
             return jsonResponse;
         }
@@ -160,19 +159,16 @@ public class QueryUtils {
 
                 news.add(newsObject);
             }
-
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Problem Parsing the News JSON Results.", e);
         }
-
         /** Return the list of News results */
         return news;
     }
 
-
     public static String getNewsAuthors(JSONArray jsonArray) {
         // Tracks author data.
-        String newsAuthors = null;
+        String newsAuthors = "";
         String author;
 
         int jsonArrayLength = jsonArray.length();
@@ -184,12 +180,11 @@ public class QueryUtils {
                 JSONObject currentTags = null;
                 try {
                     currentTags = jsonArray.getJSONObject(i);
-
                     /**
                      * if this returns true it means there is another name past the current and formats
                      * the text appropriately.
                      */
-                    if(i < jsonArrayLength - 1) {
+                    if (i < jsonArrayLength - 1) {
                         // Grabs author name
                         author = currentTags.getString("lastName");
 
@@ -198,7 +193,6 @@ public class QueryUtils {
 
                         // Adds the author's name with a , for the next author.
                         newsAuthors = newsAuthors + author + ", ";
-
                     } else {
                         // Grabs author name
                         author = currentTags.getString("lastName");
@@ -209,15 +203,13 @@ public class QueryUtils {
                         // Adds the author's name with a , for the next author.
                         newsAuthors = newsAuthors + author;
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
             return newsAuthors;
         } else {
+            newsAuthors = null;
             return newsAuthors;
         }
     }

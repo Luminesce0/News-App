@@ -26,7 +26,7 @@ public class News {
     }
 
     public String getNewsPublicationDate() {
-        return newsPublicationDate;
+        return "Published: " + newsPublicationDate;
     }
 
     public String getNewsType() {
@@ -34,7 +34,7 @@ public class News {
     }
 
     public String getNewsSectionName() {
-        return newsSectionName;
+        return "Topic: " + newsSectionName;
     }
 
     public String getNewsWebUrl() {
@@ -42,6 +42,6 @@ public class News {
     }
 
     public String getNewsAuthors() {
-        return newsAuthors;
+        return "Authors: " + newsAuthors;
     }
 }

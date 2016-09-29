@@ -41,7 +41,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         sectionNameTextView.setText(currentNews.getNewsSectionName());
 
         TextView authorsTextView = (TextView) listItemView.findViewById(R.id.news_authors);
-        if(!(currentNews.getNewsAuthors() == null)) {
+        if (!(currentNews.getNewsAuthors() == null)) {
             authorsTextView.setText(currentNews.getNewsAuthors());
         } else {
             authorsTextView.setText(getContext().getString(R.string.no_authors_listed));
