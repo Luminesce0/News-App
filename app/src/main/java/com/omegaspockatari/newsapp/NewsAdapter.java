@@ -39,6 +39,15 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         TextView sectionNameTextView = (TextView) listItemView.findViewById(R.id.news_section_name);
         sectionNameTextView.setText(currentNews.getNewsSectionName());
+        
+        //TODO: Insert function within News to format the authors and also add a bolean if they exist.
+        if(authorPresent) {
+            TextView authorsTextView = (TextView) listItemView.findViewById(R.id.news_authors);
+            authorsTextView.setText(currentNews.getAuthors());
+        } else {
+            TextView authorsTextView = (TextView) listItemView.findViewById(R.id.news_authors);
+            authorsTextView.setText(currentNews.getAuthors());    
+        }
 
         return listItemView;
     }
