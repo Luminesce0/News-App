@@ -22,6 +22,7 @@ public class NewsActivity extends AppCompatActivity
 
     private static final String LOG_TAG = NewsActivity.class.getSimpleName();
     private static final String NEWS_API_URL = "http://content.guardianapis.com/search?q=magic%20leap&api-key=test&show-tags=contributor";
+
     /**
      * This is a constant value for our News Loader. Only really relevant if we have multiple
      */
