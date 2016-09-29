@@ -11,10 +11,14 @@ import java.util.List;
  */
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
-    /** Tag for log messages */
+    /**
+     * Tag for log messages
+     */
     private static final String LOG_TAG = NewsLoader.class.getSimpleName();
 
-    /** Query URL */
+    /**
+     * Query URL
+     */
     private String mUrl;
 
     /**

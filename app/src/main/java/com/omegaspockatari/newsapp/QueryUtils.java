@@ -28,9 +28,7 @@ public class QueryUtils {
     /**
      * Class holds static methods and variables. These are accessible directly from the class name.
      */
-    public QueryUtils() {
-
-
+    private QueryUtils() {
     }
 
     public static List<News> fetchNewsData(String requestUrl) {
@@ -144,22 +142,24 @@ public class QueryUtils {
             JSONArray newsArray = baseObject.getJSONArray("results");
 
             // For each result create a {@link News} object.
-        for (int i = 0; i < newsArray.length(); i++) {
-            //Obtains the current news at location i of the array
-            JSONObject currentNews = newsArray.getJSONObject(i);
+            for (int i = 0; i < newsArray.length(); i++) {
+                //Obtains the current news at location i of the array
+                JSONObject currentNews = newsArray.getJSONObject(i);
 
-            /** Gather relevant information from the result object in newsArray */
-            String newsTitle = currentNews.optString("webTitle");
-            String newsPublicationDate = currentNews.optString("webPublicationDate");
-            String newsType = currentNews.optString("type");
-            String newsSectionName = currentNews.optString("sectionName");
-            String newsWebUrl = currentNews.optString("webUrl");
+                /** Gather relevant information from the result object in newsArray */
+                String newsAuthors = getNewsAuthors(currentNews.getJSONArray("tags"));
+                String newsTitle = currentNews.optString("webTitle");
+                String newsPublicationDate = currentNews.optString("webPublicationDate");
+                String newsType = currentNews.optString("type");
+                String newsSectionName = currentNews.optString("sectionName");
+                String newsWebUrl = currentNews.optString("webUrl");
 
-            // Create an {@link News} object with the obtained data
-            News newsObject = new News(newsTitle, newsPublicationDate, newsType, newsSectionName, newsWebUrl);
+                // Create an {@link News} object with the obtained data
+                News newsObject = new News(newsTitle, newsPublicationDate, newsType, newsSectionName,
+                        newsWebUrl, newsAuthors);
 
-            news.add(newsObject);
-        }
+                news.add(newsObject);
+            }
 
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Problem Parsing the News JSON Results.", e);
@@ -169,4 +169,56 @@ public class QueryUtils {
         return news;
     }
 
+
+    public static String getNewsAuthors(JSONArray jsonArray) {
+        // Tracks author data.
+        String newsAuthors = null;
+        String author;
+
+        int jsonArrayLength = jsonArray.length();
+
+        // Initial Loop - Only runs if there are one or more objects in the array.
+        if (jsonArrayLength >= 1) {
+            // Grabs the object and adds the last name of the author from the given JSONArray position
+            for (int i = 0; i < jsonArrayLength; i++) {
+                JSONObject currentTags = null;
+                try {
+                    currentTags = jsonArray.getJSONObject(i);
+
+                    /**
+                     * if this returns true it means there is another name past the current and formats
+                     * the text appropriately.
+                     */
+                    if(i < jsonArrayLength - 1) {
+                        // Grabs author name
+                        author = currentTags.getString("lastName");
+
+                        // Formats author's last name to a capital
+                        author = author.substring(0, 1).toUpperCase() + author.substring(1).toLowerCase();
+
+                        // Adds the author's name with a , for the next author.
+                        newsAuthors = newsAuthors + author + ", ";
+
+                    } else {
+                        // Grabs author name
+                        author = currentTags.getString("lastName");
+
+                        // Formats author's last name to a capital
+                        author = author.substring(0, 1).toUpperCase() + author.substring(1).toLowerCase();
+
+                        // Adds the author's name with a , for the next author.
+                        newsAuthors = newsAuthors + author;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+            return newsAuthors;
+        } else {
+            return newsAuthors;
+        }
+    }
 }

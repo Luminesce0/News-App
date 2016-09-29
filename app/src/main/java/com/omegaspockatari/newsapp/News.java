@@ -5,19 +5,20 @@ package com.omegaspockatari.newsapp;
  */
 public class News {
 
-
+    private String newsAuthors;
     private String newsTitle;
     private String newsPublicationDate;
     private String newsType;
     private String newsSectionName;
     private String newsWebUrl;
 
-    public News(String newsTitle, String newsPublicationDate, String newsType, String newsSectionName, String newsWebUrl) {
+    public News(String newsTitle, String newsPublicationDate, String newsType, String newsSectionName, String newsWebUrl, String newsAuthors) {
         this.newsTitle = newsTitle;
         this.newsPublicationDate = newsPublicationDate;
         this.newsType = newsType;
         this.newsSectionName = newsSectionName;
         this.newsWebUrl = newsWebUrl;
+        this.newsAuthors = newsAuthors;
     }
 
     public String getNewsTitle() {
@@ -38,5 +39,9 @@ public class News {
 
     public String getNewsWebUrl() {
         return newsWebUrl;
+    }
+
+    public String getNewsAuthors() {
+        return newsAuthors;
     }
 }
